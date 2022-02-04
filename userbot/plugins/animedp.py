@@ -33,7 +33,7 @@ async def animepp():
 
     pack = COLLECTION_STRING[rnd]
 
-    pc = requests.get("http://getwallpapers.com/collection/" + pack).text
+    pc = requests.get(f'http://getwallpapers.com/collection/{pack}').text
 
     f = re.compile("/\w+/full.+.jpg")
 

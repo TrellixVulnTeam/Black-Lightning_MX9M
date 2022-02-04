@@ -26,25 +26,12 @@ async def _(event):
                 await event.edit(
                     "**Error:** `unblock` @Missrose_bot `and retry!"
                 )
-    elif "@" in sysarg:
+    elif "@" in sysarg or "" in sysarg:
         async with borg.conversation(bot) as conv:
             try:
                 await conv.send_message("/start")
                 await conv.get_response()
-                await conv.send_message("/fban " + sysarg)
-                audio = await conv.get_response()
-                await borg.send_message(event.chat_id, audio.text)
-                await event.delete()
-            except YouBlockedUserError:
-                await event.edit(
-                    "**Error:** `unblock` @Missrose_bot `and try again!"
-                )
-    elif "" in sysarg:
-        async with borg.conversation(bot) as conv:
-            try:
-                await conv.send_message("/start")
-                await conv.get_response()
-                await conv.send_message("/fban " + sysarg)
+                await conv.send_message(f'/fban {sysarg}')
                 audio = await conv.get_response()
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
@@ -72,25 +59,12 @@ async def _(event):
                 await event.edit(
                     "**Error:** `unblock` @Missrose_bot `and retry!"
                 )
-    elif "@" in sysarg:
+    elif "@" in sysarg or "" in sysarg:
         async with borg.conversation(bot) as conv:
             try:
                 await conv.send_message("/start")
                 await conv.get_response()
-                await conv.send_message("/unfban " + sysarg)
-                audio = await conv.get_response()
-                await borg.send_message(event.chat_id, audio.text)
-                await event.delete()
-            except YouBlockedUserError:
-                await event.edit(
-                    "**Error:** `unblock` @Missrose_bot `and try again!"
-                )
-    elif "" in sysarg:
-        async with borg.conversation(bot) as conv:
-            try:
-                await conv.send_message("/start")
-                await conv.get_response()
-                await conv.send_message("/unfban " + sysarg)
+                await conv.send_message(f'/unfban {sysarg}')
                 audio = await conv.get_response()
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()

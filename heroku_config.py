@@ -1,6 +1,8 @@
 import os
 
 
+
+
 class Var(object):
     APP_ID = int(os.environ.get("APP_ID", 6))
     # 6 is a placeholder
@@ -12,9 +14,9 @@ class Var(object):
     GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
     GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
     # Here for later purposes
-    SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "").split())
+    SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "").split()}
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
-    LESS_SPAMMY = os.environ.get("LESS_SPAMMY", None), 
+    LESS_SPAMMY = os.environ.get("LESS_SPAMMY", None),
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
     TG_BOT_TOKEN_BF_HER = os.environ.get("TG_BOT_TOKEN_BF_HER", None)
@@ -34,9 +36,8 @@ class Var(object):
     if AUTH_TOKEN_DATA is not None:
         if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
             os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
-        t_file = open(TEMP_DOWNLOAD_DIRECTORY + "auth_token.txt", "w")
-        t_file.write(AUTH_TOKEN_DATA)
-        t_file.close()
+        with open(f'{TEMP_DOWNLOAD_DIRECTORY}auth_token.txt', "w") as t_file:
+            t_file.write(AUTH_TOKEN_DATA)
     PRIVATE_GROUP_ID = os.environ.get("PRIVATE_GROUP_ID", f"{COMBINED_GROUP_ID}")
     if PRIVATE_GROUP_ID is not None:
         try:
@@ -49,7 +50,8 @@ class Var(object):
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     ANTISPAM_SYSTEM = os.environ.get("ANTISPAM_SYSTEM", "DISABLE")
     LIGHTNING_PRO = os.environ.get("LIGHTNING_PRO", "YES")
-    WHITE_CHAT = set(int(x) for x in os.environ.get("WHITE_CHAT", "").split())
+    WHITE_CHAT = {int(x) for x in os.environ.get("WHITE_CHAT", "").split()}
+
 
 
 class Development(Var):

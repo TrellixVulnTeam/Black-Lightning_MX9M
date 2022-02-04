@@ -23,11 +23,11 @@ GIT_REPO_NAME = "Black-lightning"
 UPSTREAM_REPO_URL = "https://github.com/Keinshin/Black-Lightning"
 
 async def gen_chlog(repo, diff):
-    ch_log = ''
     d_form = "On " + "%d/%m/%y" + " at " + "%H:%M:%S"
-    for c in repo.iter_commits(diff):
-        ch_log += f"**#{c.count()}** : {c.committed_datetime.strftime(d_form)} : [{c.summary}]({UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}) by **{c.author}**\n"
-    return ch_log
+    return ''.join(
+        f"**#{c.count()}** : {c.committed_datetime.strftime(d_form)} : [{c.summary}]({UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}) by **{c.author}**\n"
+        for c in repo.iter_commits(diff)
+    )
 
 
 async def updateme_requirements():
@@ -52,8 +52,11 @@ async def upstream(ups):
     force_updateme = False
 
     try:
-        txt = "`Oops.. Updater cannot continue as "
-        txt += "some problems occured`\n\n**LOGTRACE:**\n"
+        txt = (
+            "`Oops.. Updater cannot continue as "
+            + "some problems occured`\n\n**LOGTRACE:**\n"
+        )
+
         repo = Repo()
     except NoSuchPathError as error:
         await ups.edit(f'{txt}\n`directory {error} is not found`')
@@ -109,9 +112,8 @@ async def upstream(ups):
         changelog_str = f'**New UPDATE available for [[{ac_br}]]({UPSTREAM_REPO_URL}/tree/{ac_br}):**\n\n' + '**CHANGELOG**\n\n' + f'{changelog}'
         if len(changelog_str) > 4096:
             await ups.edit("`Changelog is too big, view the file to see it.`")
-            file = open("output.txt", "w+")
-            file.write(changelog_str)
-            file.close()
+            with open("output.txt", "w+") as file:
+                file.write(changelog_str)
             await ups.client.send_file(
                 ups.chat_id,
                 "output.txt",
@@ -120,7 +122,7 @@ async def upstream(ups):
             remove("output.txt")
         else:
             await ups.edit(changelog_str)
-        await ups.respond(f'Do `.update now` to update')
+        await ups.respond('Do `.update now` to update')
         return
 
     if force_updateme:
@@ -159,7 +161,9 @@ async def upstream(ups):
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
-            "https://", "https://api:" + config.HEROKU_API_KEY + "@")
+            "https://", f'https://api:{config.HEROKU_API_KEY}@'
+        )
+
         if "heroku" in repo.remotes:
             remote = repo.remote("heroku")
             remote.set_url(heroku_git_url)

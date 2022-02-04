@@ -46,21 +46,22 @@ async def darkmusic(dark, QUALITY):
         "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     }
     html = requests.get(
-        "https://www.youtube.com/results?search_query=" + search, headers=headers
+        f'https://www.youtube.com/results?search_query={search}',
+        headers=headers,
     ).text
+
     soup = BeautifulSoup(html, "html.parser")
     for link in soup.find_all("a"):
         if "/watch?v=" in link.get("href"):
             # May change when Youtube Website may get updated in the future.
             video_link = link.get("href")
             break
-    video_link = "http://www.youtube.com/" + video_link
+    video_link = f'http://www.youtube.com/{video_link}'
     command = (
-        "youtube-dl --extract-audio --audio-format mp3 --audio-quality "
-        + QUALITY
-        + " "
+        f'youtube-dl --extract-audio --audio-format mp3 --audio-quality {QUALITY} '
         + video_link
     )
+
     os.system(command)
 
 
@@ -70,15 +71,17 @@ async def darkmusicvideo(dark):
         "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     }
     html = requests.get(
-        "https://www.youtube.com/results?search_query=" + search, headers=headers
+        f'https://www.youtube.com/results?search_query={search}',
+        headers=headers,
     ).text
+
     soup = BeautifulSoup(html, "html.parser")
     for link in soup.find_all("a"):
         if "/watch?v=" in link.get("href"):
             # May change when Youtube Website may get updated in the future.
             video_link = link.get("href")
             break
-    video_link = "http://www.youtube.com/" + video_link
+    video_link = f'http://www.youtube.com/{video_link}'
     command = 'youtube-dl -f "[filesize<20M]" ' + video_link
     os.system(command)
 
@@ -114,7 +117,7 @@ MARGINS = [50, 150, 250, 350, 450]
 
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + "/" + str(time.time()) + ".jpg"
+    out_put_file_name = f'{output_directory}/' + str(time.time()) + ".jpg"
     file_genertor_command = [
         "ffmpeg",
         "-ss",
@@ -138,10 +141,9 @@ async def take_screen_shot(video_file, output_directory, ttl):
     t_response = stdout.decode().strip()
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
-    else:
-        logger.info(e_response)
-        logger.info(t_response)
-        return None
+    logger.info(e_response)
+    logger.info(t_response)
+    return None
 
 
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
@@ -149,7 +151,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
 
 async def cult_small_video(video_file, output_directory, start_time, end_time):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + "/" + str(round(time.time())) + ".mp4"
+    out_put_file_name = f'{output_directory}/' + str(round(time.time())) + ".mp4"
     file_genertor_command = [
         "ffmpeg",
         "-i",
@@ -176,10 +178,9 @@ async def cult_small_video(video_file, output_directory, start_time, end_time):
     t_response = stdout.decode().strip()
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
-    else:
-        logger.info(e_response)
-        logger.info(t_response)
-        return None
+    logger.info(e_response)
+    logger.info(t_response)
+    return None
 
 
 async def make_gif(event, file):
@@ -218,21 +219,22 @@ async def simpmusic(simp, QUALITY):
         "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     }
     html = requests.get(
-        "https://www.youtube.com/results?search_query=" + search, headers=headers
+        f'https://www.youtube.com/results?search_query={search}',
+        headers=headers,
     ).text
+
     soup = BeautifulSoup(html, "html.parser")
     for link in soup.find_all("a"):
         if "/watch?v=" in link.get("href"):
             # May change when Youtube Website may get updated in the future.
             video_link = link.get("href")
             break
-    video_link = "http://www.youtube.com/" + video_link
+    video_link = f'http://www.youtube.com/{video_link}'
     command = (
-        "youtube-dl --extract-audio --audio-format mp3 --audio-quality "
-        + QUALITY
-        + " "
+        f'youtube-dl --extract-audio --audio-format mp3 --audio-quality {QUALITY} '
         + video_link
     )
+
     os.system(command)
 
 
@@ -250,15 +252,17 @@ async def simpmusicvideo(simp):
         "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     }
     html = requests.get(
-        "https://www.youtube.com/results?search_query=" + search, headers=headers
+        f'https://www.youtube.com/results?search_query={search}',
+        headers=headers,
     ).text
+
     soup = BeautifulSoup(html, "html.parser")
     for link in soup.find_all("a"):
         if "/watch?v=" in link.get("href"):
             # May change when Youtube Website may get updated in the future.
             video_link = link.get("href")
             break
-    video_link = "http://www.youtube.com/" + video_link
+    video_link = f'http://www.youtube.com/{video_link}'
     command = 'youtube-dl -f "[filesize<20M]" ' + video_link
     os.system(command)
 

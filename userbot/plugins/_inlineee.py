@@ -94,7 +94,7 @@ async def load(lightning):
         await lightning.edit(f"Successfully loaded {krish_blac}")
     except Exception as e:
         await lightning.edit(
-            f"Sorry,{krish_blac} can not be loaded\nbecause of the following error.\n{str(e)}"
+            f'Sorry,{krish_blac} can not be loaded\nbecause of the following error.\n{e}'
         )
 
  # created by @cyper666
@@ -185,7 +185,8 @@ async def _(event):
 
 BOT_MSG = os.environ.get("BOT_MSG", None)
 if BOT_MSG is None:
-    BOT_LIT = f"Hey! This is adavanced PM Protection by [𝐁𝐥𝐚𝐜𝐤 𝐋𝐢𝐠𝐡𝐭𝐧𝐢𝐧𝐠](https://t.me/lightning_support_group). "
+    BOT_LIT = 'Hey! This is adavanced PM Protection by [𝐁𝐥𝐚𝐜𝐤 𝐋𝐢𝐠𝐡𝐭𝐧𝐢𝐧𝐠](https://t.me/lightning_support_group). '
+
 else:
     BOT_LIT = BOT_MSG   
 
@@ -207,9 +208,7 @@ else:
     WARNING = LIGHTNING_WARN
 
 LIGHTNING_BOT_PIC = (
-    LIGHTNING_BOT_PIC
-    if LIGHTNING_BOT_PIC
-    else "https://telegra.ph/file/ff90ed0b44221a7b438b7.jpg"
+    LIGHTNING_BOT_PIC or "https://telegra.ph/file/ff90ed0b44221a7b438b7.jpg"
 )
 
 
@@ -229,11 +228,12 @@ async def inline_handler(lightning):
         rev_text = query[::-1]
         buttons = lightnings_menu_for_help(0, CMD_LIST, "helpme")
         result = builder.article(
-            f"Help Menu",
+            'Help Menu',
             text="\n{}\n`Plugins`: {}".format(query, len(CMD_LIST)),
             buttons=buttons,
             link_preview=False,
         )
+
         await lightning.answer([result] if result else None)
     elif lightning.query.user_id == bot.uid and query.startswith("**Black") or query.startswith("Black"):
         result = builder.article(
@@ -269,9 +269,9 @@ async def inline_handler(lightning):
                     custom.Button.inline(
                         "Lemme In :)", 
                         data="lol_u_think_so",
-                        
+
                     )
-                        
+
                 ],
 
             ],
@@ -306,18 +306,18 @@ async def lightning_pugins_query_hndlr(lightning):
    )
 ) # Thanks To Friday Userbot
 async def lightning_pugins_query_hndlr(lightning):
-    if not lightning.query.user_id == bot.uid:
+    if lightning.query.user_id != bot.uid:
         how = "Do you Really Think This is for you? \nThen Make your own Lightning Bot and don't poke your nose in mine"
         await lightning.answer(how, cache_time=0, alert=True)
         return
     light_pulu_name = lightning.data_match.group(1).decode("UTF-8")
-   
+
     if light_pulu_name in CMD_HELP.keys():
-       
+
        lightning_help_strin  = f"**🔺 NAME 🔺 :** `{light_pulu_name}` \n\n{CMD_HELP[light_pulu_name]}"
        lightning_is_best = lightning_help_strin 
        lightning_is_best += "\n\n**In Case Any Problem**[𝐁𝐥𝐚𝐜𝐤 𝐋𝐢𝐠𝐡𝐭𝐧𝐢𝐧𝐠](https://t.me/lightning_support_group) ".format(light_pulu_name)
-    
+
     else:
        lightning_help_strin  = f"**🔺 NAME 🔺 :** `{light_pulu_name}` \n\n`{CMD_LIST[light_pulu_name]}`\n\n**Ask at @Lightning_Support_Group"
        lightning_is_best = lightning_help_strin 
@@ -400,7 +400,7 @@ async def lightning_is_better(lightning):
         return
     await lightning.get_chat()
     lightning_id = lightning.query.user_id
-    text1 = f"LOL You Think So You Can😂😂\nGo and wait😂😂"
+    text1 = 'LOL You Think So You Can😂😂\nGo and wait😂😂'
     await lightning.edit("Off Course Go To Hell Dude😛")
     await bot.send_message(lightning.query.user_id, text1)
     await bot(functions.contacts.BlockRequest(lightning.query.user_id))
@@ -631,10 +631,7 @@ In Case Any Problem [𝐁𝐥𝐚𝐜𝐤 𝐋𝐢𝐠𝐡𝐭𝐧𝐢𝐧𝐠](
 def lightnings_menu_for_help(b_lac_krish, lightning_plugs, lightning_lol):
     lightning_no_rows = 10
     lightning_no_coulmns = 3
-    lightning_plugins = []
-    for p in lightning_plugs:
-        if not p.startswith("_"):
-            lightning_plugins.append(p)
+    lightning_plugins = [p for p in lightning_plugs if not p.startswith("_")]
     lightning_plugins = sorted(lightning_plugins)
     plugins = [
         custom.Button.inline(
@@ -661,7 +658,7 @@ def lightnings_menu_for_help(b_lac_krish, lightning_plugs, lightning_lol):
                custom.Button.inline(
                     "ℓєfт ρℓυgιи ", data="{}_next({})".format(lightning_lol, lightning_plugins_pages)
                 ),
-                
+
             )
         ]
     return pairs

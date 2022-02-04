@@ -5,6 +5,8 @@ from telethon.tl.types import ChatBannedRights
 ENV = bool(os.environ.get("ENV", False))
 
 
+
+
 class Config(object):
     APP_ID = int(os.environ.get("APP_ID", 6))
     # 6 is a placeholder
@@ -26,21 +28,31 @@ class Config(object):
     GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
     # Here for later purposes
     BOT_HANDLER = os.environ.get("BOT_HANDLER", "^/")
-    SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "1434332284").split())
-    WHITELIST_USERS = set(
+    SUDO_USERS = {
+        int(x) for x in os.environ.get("SUDO_USERS", "1434332284").split()
+    }
+
+    WHITELIST_USERS = {
         int(x) for x in os.environ.get("WHITELIST_USERS", "1311769691").split()
-    )
-    BLACKLIST_USERS = set(
+    }
+
+    BLACKLIST_USERS = {
         int(x) for x in os.environ.get("BLACKLIST_USERS", "1434332284").split()
-    )
-    OWNER_ID = set(int(x) for x in os.environ.get("OWNER_ID", "1311769691").split())
-    SUPPORT_USERS = set(
+    }
+
+    OWNER_ID = {int(x) for x in os.environ.get("OWNER_ID", "1311769691").split()}
+    SUPPORT_USERS = {
         int(x) for x in os.environ.get("SUPPORT_USERS", "1232461895").split()
-    )
-    BEST_USERS = set(int(x) for x in os.environ.get("BEST_USERS", "1754865180").split())
-    DEVLOPERS = set(
+    }
+
+    BEST_USERS = {
+        int(x) for x in os.environ.get("BEST_USERS", "1754865180").split()
+    }
+
+    DEVLOPERS = {
         int(x) for x in os.environ.get("DEVLOPERS_USERS", "1311769691").split()
-    )
+    }
+
     # custom vars
     CUSTOM_ALIVE = os.environ.get("CUSTOM_ALIVE", None)
     BIO_MSG = os.environ.get("BIO_MSG", None)
@@ -115,8 +127,9 @@ class Config(object):
     ANTI_SPAMINC_TOKEN = os.environ.get("ANTI_SPAMINC_TOKEN", None)
     SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get("SCREEN_SHOT_LAYER_ACCESS_KEY", None)
     ASSISTANT_LOG = int(os.environ.get("ASSISTANT_LOG", False))
-    PRIVATE_GROUP_BOT_API_ID = os.environ.get("PRIVATE_GROUP_BOT_API_ID", f"{COMBINED_GROUP_ID}")
-    if PRIVATE_GROUP_BOT_API_ID:
+    if PRIVATE_GROUP_BOT_API_ID := os.environ.get(
+        "PRIVATE_GROUP_BOT_API_ID", f"{COMBINED_GROUP_ID}"
+    ):
         PRIVATE_GROUP_BOT_API_ID = int(PRIVATE_GROUP_BOT_API_ID)
     AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
     PMSECURITY = os.environ.get("PMSECURITY", "ON")
@@ -128,13 +141,13 @@ class Config(object):
     AUTOPIC_FONT_COLOUR = os.environ.get("AUTOPIC_FONT_COLOUR", None)
     if AUTH_TOKEN_DATA is not None:
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
-        t_file = open(TEMP_DOWNLOAD_DIRECTORY + "auth_token.txt", "w")
-        t_file.write(AUTH_TOKEN_DATA)
-        t_file.close()
+        with open(f'{TEMP_DOWNLOAD_DIRECTORY}auth_token.txt', "w") as t_file:
+            t_file.write(AUTH_TOKEN_DATA)
     LOAD_MYBOT = os.environ.get("LOAD_MYBOT", "True")
-    UB_BLACK_LIST_CHAT = set(
+    UB_BLACK_LIST_CHAT = {
         int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split()
-    )
+    }
+
     PRIVATE_GROUP_ID = os.environ.get("PRIVATE_GROUP_ID", f"{COMBINED_GROUP_ID}")
     if PRIVATE_GROUP_ID is not None:
         try:
@@ -144,14 +157,17 @@ class Config(object):
                 "Invalid Private Group ID. Make sure your ID is starts with -100 and make sure that it is only numbers."
             )
 
-    PM_LOGGR_BOT_API_ID = os.environ.get("PM_LOGGR_BOT_API_ID", f"{COMBINED_GROUP_ID}")
-    if PM_LOGGR_BOT_API_ID:
+    if PM_LOGGR_BOT_API_ID := os.environ.get(
+        "PM_LOGGR_BOT_API_ID", f"{COMBINED_GROUP_ID}"
+    ):
         PM_LOGGR_BOT_API_ID = int(PM_LOGGR_BOT_API_ID)
     BAN_GROUP_ID = os.environ.get("FBAN_GROUP_ID", f"{COMBINED_GROUP_ID}")
-    FBAN_GROUP_ID = os.environ.get("FBAN_GROUP_ID", f"{COMBINED_GROUP_ID}")
-    if FBAN_GROUP_ID:
+    if FBAN_GROUP_ID := os.environ.get(
+        "FBAN_GROUP_ID", f"{COMBINED_GROUP_ID}"
+    ):
         FBAN_GROUP_ID = int(FBAN_GROUP_ID)
     EXCLUDE_FED = os.environ.get("EXCLUDE_FED", None)
+
 
 
 class Development(Config):

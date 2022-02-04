@@ -7,6 +7,7 @@ Coded by @furki
 
 """
 
+
 import asyncio
 import os
 import shutil
@@ -24,7 +25,7 @@ from userbot.Config import Var
 from userbot.utils import lightning_cmd, progress
 
 thumb_image_path = Var.TEMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
-extracted = Var.TEMP_DOWNLOAD_DIRECTORY + "extracted/"
+extracted = f'{Var.TEMP_DOWNLOAD_DIRECTORY}extracted/'
 if not os.path.isdir(extracted):
     os.makedirs(extracted)
 
@@ -51,7 +52,7 @@ async def _(event):
                 ),
             )
             directory_name = downloaded_file_name
-            await event.edit(downloaded_file_name)
+            await event.edit(directory_name)
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
     zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
@@ -59,12 +60,13 @@ async def _(event):
     )
     await borg.send_file(
         event.chat_id,
-        directory_name + ".zip",
+        f'{directory_name}.zip',
         caption="Zipped By cat",
         force_document=True,
         allow_cache=False,
         reply_to=event.message.id,
     )
+
     await event.edit("DONE!!!")
     await asyncio.sleep(5)
     await event.delete()
@@ -113,7 +115,7 @@ async def _(event):
                 reply_to=event.message.id,
             )
             try:
-                os.remove(directory_name + ".rar")
+                os.remove(f'{directory_name}.rar')
                 os.remove(directory_name)
             except:
                 pass
@@ -126,7 +128,7 @@ async def _(event):
         directory_name = input_str
 
         await event.edit(
-            "Local file compressed to `{}`".format(directory_name + ".rar")
+            "Local file compressed to `{}`".format(f'{directory_name}.rar')
         )
 
 
@@ -165,7 +167,7 @@ async def _(event):
                 reply_to=event.message.id,
             )
             try:
-                os.remove(directory_name + ".7z")
+                os.remove(f'{directory_name}.7z')
                 os.remove(directory_name)
             except:
                 pass
@@ -177,7 +179,9 @@ async def _(event):
     elif input_str:
         directory_name = input_str
 
-        await event.edit("Local file compressed to `{}`".format(directory_name + ".7z"))
+        await event.edit(
+            "Local file compressed to `{}`".format(f'{directory_name}.7z')
+        )
 
 
 @borg.on(lightning_cmd(pattern=("tar ?(.*)")))
@@ -203,8 +207,7 @@ async def _(event):
             await event.edit("Finish downloading to my local")
             to_upload_file = directory_name
             output = await create_archive(to_upload_file)
-            is_zip = False
-            if is_zip:
+            if is_zip := False:
                 check_if_file = await create_archive(to_upload_file)
                 if check_if_file is not None:
                     to_upload_file = check_if_file
@@ -309,11 +312,9 @@ async def _(event):
                 document_attributes = []
                 if single_file.endswith((".mp4", ".mp3", ".flac", ".webm")):
                     metadata = extractMetadata(createParser(single_file))
-                    duration = 0
                     width = 0
                     height = 0
-                    if metadata.has("duration"):
-                        duration = metadata.get("duration").seconds
+                    duration = metadata.get("duration").seconds if metadata.has("duration") else 0
                     if os.path.exists(thumb_image_path):
                         metadata = extractMetadata(createParser(thumb_image_path))
                         if metadata.has("width"):
@@ -400,11 +401,9 @@ async def _(event):
                 document_attributes = []
                 if single_file.endswith((".mp4", ".mp3", ".flac", ".webm")):
                     metadata = extractMetadata(createParser(single_file))
-                    duration = 0
                     width = 0
                     height = 0
-                    if metadata.has("duration"):
-                        duration = metadata.get("duration").seconds
+                    duration = metadata.get("duration").seconds if metadata.has("duration") else 0
                     if os.path.exists(thumb_image_path):
                         metadata = extractMetadata(createParser(thumb_image_path))
                         if metadata.has("width"):
@@ -456,8 +455,8 @@ async def _(event):
     mone = await event.edit("Processing ...")
     if not os.path.isdir(Var.dTEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Var.dTEMP_DOWNLOAD_DIRECTORY)
-    extracted = Var.dTEMP_DOWNLOAD_DIRECTORY + "extracted/"
-    thumb_image_path = Var.dTEMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
+    extracted = f'{Var.dTEMP_DOWNLOAD_DIRECTORY}extracted/'
+    thumb_image_path = f'{Var.dTEMP_DOWNLOAD_DIRECTORY}/thumb_image.jpg'
     if not os.path.isdir(extracted):
         os.makedirs(extracted)
     if event.reply_to_msg_id:
@@ -501,11 +500,9 @@ async def _(event):
                 document_attributes = []
                 if single_file.endswith((".mp4", ".mp3", ".flac", ".webm")):
                     metadata = extractMetadata(createParser(single_file))
-                    duration = 0
                     width = 0
                     height = 0
-                    if metadata.has("duration"):
-                        duration = metadata.get("duration").seconds
+                    duration = metadata.get("duration").seconds if metadata.has("duration") else 0
                     if os.path.exists(thumb_image_path):
                         metadata = extractMetadata(createParser(thumb_image_path))
                         if metadata.has("width"):

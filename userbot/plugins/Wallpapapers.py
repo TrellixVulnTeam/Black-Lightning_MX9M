@@ -49,7 +49,7 @@ async def animepp():
     os.system("rm -rf donot.jpg")
     rnd = random.randint(0, len(PACK) - 1)
     pack = PACK[rnd]
-    pc = requests.get("http://getwallpapers.com/collection/" + pack).text
+    pc = requests.get(f'http://getwallpapers.com/collection/{pack}').text
     f = re.compile("/\w+/full.+.jpg")
     f = f.findall(pc)
     fy = "http://getwallpapers.com" + random.choice(f)

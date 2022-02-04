@@ -1269,12 +1269,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(action_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1287,7 +1287,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 @borg.on(events.NewMessage(pattern=r"\.harem", outgoing=True))
@@ -1301,12 +1301,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(harem_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1319,7 +1319,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 @borg.on(events.NewMessage(pattern=r"\.mecha", outgoing=True))
@@ -1333,12 +1333,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(mecha_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1351,7 +1351,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 @borg.on(events.NewMessage(pattern=r"\.romance", outgoing=True))
@@ -1365,12 +1365,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(romance_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1383,7 +1383,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 @borg.on(events.NewMessage(pattern=r"\.isekai", outgoing=True))
@@ -1397,12 +1397,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(isekai_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1415,7 +1415,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 @borg.on(events.NewMessage(pattern=r"\.adventure", outgoing=True))
@@ -1429,12 +1429,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(adventure_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1447,7 +1447,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 @borg.on(events.NewMessage(pattern=r"\.slice", outgoing=True))
@@ -1461,12 +1461,12 @@ async def action(event):
     while i != number_of_times:
         anime = random.choice(slice_of_life_list)
         anime_list.append(anime + "\n")
-        i = i + 1
+        i += 1
     counter = 1
     msg_str = []
     for i in anime_list:
         msg_str.append(str(counter) + ". " + i)
-        counter = counter + 1
+        counter += 1
     msg_str = str(msg_str)
     msg_str = msg_str.replace("['", "")
     msg_str = msg_str.replace(",", "")
@@ -1479,7 +1479,7 @@ async def action(event):
     msg_str = msg_str.replace("\\n", "\n")
     msg_str = msg_str.replace("'", "")
     msg_str = msg_str.replace('"', "")
-    await event.edit("**" + msg_str + "**")
+    await event.edit(f'**{msg_str}**')
 
 
 

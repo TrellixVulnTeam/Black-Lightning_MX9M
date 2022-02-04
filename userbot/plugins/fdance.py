@@ -22,7 +22,7 @@ async def _(event):
 
     animation_interval = 1
 
-    animation_ttl = range(0, 5)
+    animation_ttl = range(5)
 
     # input_str = event.pattern_match.group(1)
 
@@ -59,7 +59,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
     inp = event.pattern_match.group(1)
     sn = urllib.parse.quote_plus(inp)
     results = []
-    sl = "https://api.sumanjay.cf/torrent/?query=" + sn
+    sl = f'https://api.sumanjay.cf/torrent/?query={sn}'
     try:
         op = requests.get(url=sl, timeout=10).json()
     except:
@@ -136,7 +136,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
     search = SearchVideos(f"{testinput}", offset=1, mode="dict", max_results=30)
     mi = search.result()
     moi = mi["search_result"]
-    if search == None:
+    if search is None:
         resultm = builder.article(
             title="No Results.",
             description="Try Again With correct Spelling",

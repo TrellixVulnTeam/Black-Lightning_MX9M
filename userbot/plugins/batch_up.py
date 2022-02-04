@@ -21,7 +21,7 @@ async def batch_upload(event):
         files.sort()
         await event.edit("Uploading Files on Telegram...")
         for file in files:
-            required_file_name = temp_dir + "/" + file
+            required_file_name = f'{temp_dir}/{file}'
             print(required_file_name)
             await borg.send_file(event.chat_id, required_file_name, force_document=True)
     else:
